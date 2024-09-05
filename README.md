@@ -1,4 +1,5 @@
-# DATUMO
+Stanisław Rzewuski
+# DATUMO 
 
 **ZADANIE REKRUTACYJNE**
 Celem zadania jest implementacja aplikacji, która znajduje wszystkie pary liczb
