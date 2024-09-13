@@ -39,4 +39,4 @@ jobs:
     #    python -m unittest unit_tests.TestFunctions
     - name: Test with pytest
       run: |
-        pytest unit_tests_in_pytest.py
+        pytest ./Python/unit_tests_in_pytest.py
