@@ -33,7 +33,7 @@ class TestFunctions(unittest.TestCase):
     @patch("builtins.open", side_effect=ValueError)
     def test_read_numbers_from_file_ValueError(self, mock_file):
         with self.assertRaises(SystemExit):
-            read_numbers_from_file([0,11,9])
+            read_numbers_from_file([0, 11, 9])
 
     # Test for file that is empty
     @patch("builtins.open")
