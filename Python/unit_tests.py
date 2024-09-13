@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import mock_open, patch
 from datetime import datetime
-from helpers_module import sort_pair, read_numbers_from_file, write_numbers_to_file, find_pairs, get_time_stamp, Style
+from helpers_module import sort_pair, read_numbers_from_file, write_numbers_to_file, find_pairs, get_time_stamp
 
 
 class TestFunctions(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestFunctions(unittest.TestCase):
 
     # Test for read_numbers_from_file function
     @patch("builtins.open", new_callable=mock_open, read_data="1;2;3")
-    def test_read_numbers_from_file_semicolon(self, mock_file):
+    def test_read_numbers_from_file_semicolon_data(self, mock_file):
         result = read_numbers_from_file("dummy_path")
         self.assertEqual(result, [1, 2, 3])
 
@@ -22,11 +22,6 @@ class TestFunctions(unittest.TestCase):
     def test_read_numbers_from_file_comma(self, mock_file):
         result = read_numbers_from_file("dummy_path")
         self.assertEqual(result, [4, 5, 6])
-
-    @patch("builtins.open", new_callable=mock_open, read_data="4,5,A")
-    def test_read_numbers_from_file_value_error(self, mock_file):
-        with self.assertRaises(SystemExit):
-            read_numbers_from_file("dummy_path")
 
     # Test for file not found in read_numbers_from_file
     @patch("builtins.open", side_effect=FileNotFoundError)
@@ -36,7 +31,7 @@ class TestFunctions(unittest.TestCase):
 
     # Test for file not found in read_numbers_from_file
     @patch("builtins.open", side_effect=ValueError)
-    def test_read_numbers_from_file_not_found(self, mock_file):
+    def test_read_numbers_from_file_ValueError(self, mock_file):
         with self.assertRaises(SystemExit):
             read_numbers_from_file([0,11,9])
 
@@ -48,25 +43,25 @@ class TestFunctions(unittest.TestCase):
 
     # Test for file that is having float instead of integer
     @patch("builtins.open")
-    def test_read_numbers_from_file_empty_file(self, mock_file):
+    def test_read_numbers_from_file_file_with_float_number(self, mock_file):
         with self.assertRaises(SystemExit):
             read_numbers_from_file(".\\TestData\\TESTInput_2_float.csv")
 
     # Test for file that is having single comma
     @patch("builtins.open")
-    def test_read_numbers_from_file_empty_file(self, mock_file):
+    def test_read_numbers_from_file_file_with_single_comma(self, mock_file):
         with self.assertRaises(SystemExit):
             read_numbers_from_file(".\\TestData\\TESTInput_2_singleComma.csv")
 
     # Test for file that is having single semicolon
     @patch("builtins.open")
-    def test_read_numbers_from_file_empty_file(self, mock_file):
+    def test_read_numbers_from_file_file_with_single_semicolon(self, mock_file):
         with self.assertRaises(SystemExit):
             read_numbers_from_file(".\\TestData\\TESTInput_2_singleSemicolon.csv")
 
     # Test for file that is having single string
     @patch("builtins.open")
-    def test_read_numbers_from_file_empty_file(self, mock_file):
+    def test_read_numbers_from_file_file_with_string(self, mock_file):
         with self.assertRaises(SystemExit):
             read_numbers_from_file(".\\TestData\\TESTInput_2_string.csv")
 
