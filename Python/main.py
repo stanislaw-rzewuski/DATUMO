@@ -27,6 +27,6 @@ if __name__ == "__main__":
     print(f" Results array= {results}")
     print(f" Left overs array = {leftovers}" + Style.RESET)
 
-    is_file_write_OK = write_numbers_to_file(output_path, results)  # results file format is not covered by requirements
+    is_file_write_OK = write_numbers_to_file(output_path, results) # results file format is not covered by requirements
     if is_file_write_OK == False:
         print(Style.RED + f" Something went wrong with file writting" + Style.RESET)
