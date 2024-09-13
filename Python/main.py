@@ -1,45 +1,32 @@
-from module import *
+import re
 
-file_path = ".\\TestData\\input1.txt"
-file_path = ".\\TestData\\input2.txt"
-InputArray = read_numbers_from_file(file_path)
+from helpers_module import *
 
-# InputArray = [4, 8, 9, 0, 12, 1, 4, 2, 12, 12, 4, 4, 8, 11, 12, 0]
-array = InputArray.copy()
-results = []
-i = 0
-run = 1
+# Main program execution
 
-while run == 1:
-    arraySize = len(array)
-    element = array[i]
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <path_to_csv_file>")
+    else:
+        file_path = sys.argv[1]
 
-    for k in range(1, len(array)):
+    time_stamp = get_time_stamp()
 
-        print(f"i={i}, k={k} inspected element = {element} and {array[k]}")
-        if element + array[k] == 12:
-            print(style.MAGENTA + "FOUND sum of 2 elements equal to 12")
-            print(f"i={i}, k={k}, pair=[{element},{array[k]}]" + style.RESET)
-            pair = [element, array[k]]
-            pair = sort_pair(pair)
-            results.append(pair)
-            array.pop(k)
-            array.pop(i)
-            arraySize = len(array)
-            break
+    output_file_name = re.search(r"\\([^\\]+)\....$", file_path).group(1)
+    output_file_name = f"{time_stamp}_{output_file_name}"
+    output_path = f".\\TestsOutput\\{output_file_name}.out"
 
-    #
-    print(f"k loop increasing i+1 i={i}, k={k} , arraySize={arraySize}")
-    if i + 1 >= arraySize:
-        print(f"HAND breaking")
-        print(array)
-        run = 0;
-        break
-    i = i + 1;
-# end of while
+    InputArray = read_numbers_from_file(file_path)
 
-# let's print the results at the end
-print(style.GREEN + "\nOUTPUT: lets print the results")
-print(f" Input array= {InputArray}")
-print(f" Results array= {results}")
-print(f" Left overs array = {array}" + style.RESET)
+    results, leftovers = find_pairs(InputArray, 12)
+
+    # let's print the results at the end
+    print(Style.GREEN + "\nOUTPUT: lets print the results")
+    print(f" Input array= {InputArray}")
+    write_numbers_to_file(output_path, InputArray)
+    print(f" Results array= {results}")
+    print(f" Left overs array = {leftovers}" + Style.RESET)
+
+    is_file_write_OK = write_numbers_to_file(output_path, results)  # results file format is not covered by requirements
+    if is_file_write_OK == False:
+        print(Style.RED + f" Something went wrong with file writting" + Style.RESET)
