@@ -109,6 +109,36 @@ def write_numbers_to_file(file_path, output):
         sys.exit("Terminating the program")
 
 
+def find_pairsOn(input_array, target_sum):
+    """
+    Optimized version of finding all pairs in the array that sum to target_sum.
+
+    :param input_array: array/list with integer numbers
+    :param target_sum: value of target sum of two elements
+
+    :returns:
+    results - array with results - contains pairs of numbers. Each pair sums to target_sum
+    leftovers - array with numbers - that are not summing to target_sum
+    """
+    seen = set()  # To store elements we've seen so far
+    results = []  # To store pairs that sum to target_sum
+    leftovers = []  # To store numbers that don't form any pair
+
+    for num in input_array:
+        complement = target_sum - num
+        if complement in seen:
+            # We found a pair
+            pair = sorted([num, complement])
+            results.append(pair)
+            seen.remove(complement)  # Remove complement to avoid pairing again
+        else:
+            seen.add(num)  # Add current number for future pair checking
+
+    leftovers = list(seen)  # Remaining elements in `seen` are leftovers
+    return results, leftovers
+
+
+
 def find_pairs(input_array, target_sum):
     """
     Find all pairs in the array that sum to the target_sum.

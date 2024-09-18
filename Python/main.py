@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     InputArray = read_numbers_from_file(file_path)
 
-    results, leftovers = find_pairs(InputArray, 12)
+    results, leftovers = find_pairsOn(InputArray, 12)
 
     # let's print the results at the end
     print(Style.GREEN + "\nOUTPUT: lets print the results")
